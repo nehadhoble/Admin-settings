@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "697844090083",
+    "project_id": "adminpasswordmanager",
+    "storage_bucket": "adminpasswordmanager.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:697844090083:android:2eece3c06fe5c8526131d6",
+        "android_client_info": {
+          "package_name": "com.example.adminapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcOFE_Al-39yT1y_3aW9uqmu-D9NUYUf0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
