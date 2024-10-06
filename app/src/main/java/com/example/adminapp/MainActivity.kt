@@ -27,6 +27,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnPin: Button
     private lateinit var btnUnpin: Button
 
+    private lateinit var btnLock: Button
+    private lateinit var btnUnlock: Button
+
+    private var failedAttempts = 0
+    private var policy: PasswordPolicy? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,10 +48,28 @@ class MainActivity : AppCompatActivity() {
             unpinApp()
         }
 
+        btnLock = findViewById(R.id.btnLock)
+        btnUnlock = findViewById(R.id.btnUnlock)
+
+        btnLock.setOnClickListener {
+            lockDevice()
+        }
+
+        btnUnlock.setOnClickListener {
+            unlockDevice()
+        }
+
         sharedPreferences = getSharedPreferences("admin_prefs", MODE_PRIVATE)
 
         devicePolicyManager = getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
         compName = ComponentName(this, DeviceAdminReceiver::class.java)
+
+        if (devicePolicyManager.isDeviceOwnerApp(packageName)) {
+            devicePolicyManager.setStatusBarDisabled(compName, true) // Disable the status bar
+            Toast.makeText(this, "Device owner setup successful!", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Failed to set up as device owner", Toast.LENGTH_SHORT).show()
+        }
 
         val btnActivate = findViewById<Button>(R.id.btnActivate)
         btnActivate.setOnClickListener {
@@ -162,5 +185,21 @@ class MainActivity : AppCompatActivity() {
         } else {
             super.onBackPressed()
         }
+    }
+
+
+    private fun lockDevice() {
+        if (devicePolicyManager.isAdminActive(compName)) {
+            devicePolicyManager.lockNow()
+            Toast.makeText(this, "Device locked", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Admin not active", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun unlockDevice() {
+        // Unlocking programmatically is restricted for security reasons.
+        // Users must unlock the device manually.
+        Toast.makeText(this, "Please unlock the device manually", Toast.LENGTH_SHORT).show()
     }
 }
