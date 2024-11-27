@@ -24,4 +24,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Unpin App" />
+
+
+    <Button
+        android:id="@+id/btnLock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lock Device" />
+
+    <Button
+        android:id="@+id/btnUnlock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Unlock Device" />
+
 </LinearLayout>
